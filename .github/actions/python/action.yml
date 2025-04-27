@@ -11,4 +11,15 @@ runs:
         uses: actions/setup-node@v4
         with:
           node-version: '3.x' # Specify the Node.js version you need
+
+      # Run a custom command
+      - name: Install dependencies
+        run: |
+          echo "Installing dependencies..."
+          npm install
+          python -m pip install --upgrade pip
+          if [ -f "requirements.txt" ]; then
+            pip install -r requirements.txt
+          fi
+        working-directory: ${{ inputs.working-directory }}
       
