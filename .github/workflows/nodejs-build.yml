@@ -1,13 +1,13 @@
 name: Node.js Application Build
 
 on:
-  workflow_call:
+  workflow_call:  # This makes it reusable
     inputs:
       node-version:
         type: string
         description: "The Node.js version to use."
         required: false
-        default: "20.x"
+        default: "14.x"
       working-directory:
         type: string
         description: "The directory to execute commands in."
