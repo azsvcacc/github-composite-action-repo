@@ -23,7 +23,7 @@ jobs:
 
       # Step 2: Set up Node.js environment
       - name: Set up Node.js
-        uses: ./github/actions/nodejs  # Assuming the composite action is stored in ./github/actions/nodejs
+        uses: azsvcacc/github-composite-action-repo/.github/actions/nodejs@main  # Assuming the composite action is stored in ./github/actions/nodejs
         with:
           node-version: ${{ inputs.node-version }}
           working-directory: ${{ inputs.working-directory }}
