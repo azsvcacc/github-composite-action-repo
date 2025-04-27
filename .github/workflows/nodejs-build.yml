@@ -1,7 +1,7 @@
-name: Node.js Application Build
+name: Angular Application Build
 
 on:
-  workflow_call:
+  workflow_call:  # This makes it reusable
     inputs:
       node-version:
         type: string
@@ -15,7 +15,7 @@ on:
         default: "."
 
 jobs:
-  NodeJs:
+  AngularBuild:
     runs-on: self-hosted-linux-vm
     steps:
       # Step 1: Checkout the repository
@@ -29,13 +29,8 @@ jobs:
           node-version: ${{ inputs.node-version }}
           working-directory: ${{ inputs.working-directory }}
 
-      # Step 3: Install project dependencies
-      - name: Install dependencies
-        run: npm install
-        working-directory: ${{ inputs.working-directory }}
-
-      # Step 4: Build the project
-      - name: Build the project
+      # Step 4: Build Angular application
+      - name: Build Angular app
         run: npm run build
         working-directory: ${{ inputs.working-directory }}
 
