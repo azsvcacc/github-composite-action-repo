@@ -1,5 +1,4 @@
 name: Angular Application Build
-
 on:
   workflow_call:  # This makes it reusable
     inputs:
