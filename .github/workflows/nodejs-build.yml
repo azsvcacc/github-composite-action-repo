@@ -1,8 +1,8 @@
 name: Node.js Application Build
 
 on:
-  workflow_call:  # This makes it reusable
-    inputs:
+ workflow_call:  # This makes it reusable
+  inputs:
       node-version:
         type: string
         description: "The Node.js version to use."
