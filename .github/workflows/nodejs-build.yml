@@ -1,8 +1,8 @@
 name: Node.js Application Build
 
 on:
- workflow_call:  # This makes it reusable
-  inputs:
+  workflow_call:  # This makes it reusable
+    inputs:
       node-version:
         type: string
         description: "The Node.js version to use."
@@ -24,20 +24,24 @@ jobs:
 
       # Step 2: Set up Node.js environment
       - name: Set up Node.js
-        uses: github-composite-action-repo/.github/actions/nodejs@main
+        uses: ./github/actions/nodejs  # Assuming the composite action is stored in ./github/actions/nodejs
         with:
           node-version: ${{ inputs.node-version }}
           working-directory: ${{ inputs.working-directory }}
 
-      # Install project dependencies
-      - name: build
+      # Step 3: Install project dependencies
+      - name: Install dependencies
+        run: npm install
+        working-directory: ${{ inputs.working-directory }}
+
+      # Step 4: Build the project
+      - name: Build the project
         run: npm run build
-      # Artifactory upload
+        working-directory: ${{ inputs.working-directory }}
+
+      # Step 5: Upload the build artifact
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.2
         with:
-          # Artifact name
           name: build-artifacts
           path: dist
-
-
