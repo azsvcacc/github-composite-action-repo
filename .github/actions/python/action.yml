@@ -1,25 +1,46 @@
-name: install Python
+name: Install Python and Node.js
+description: Set up Python and Node.js environments and install dependencies.
+
+inputs:
+  working-directory:
+    description: "The directory to execute commands in."
+    required: false
+    default: "./"
+  python-version:
+    description: "Python version to use."
+    required: false
+    default: "3.10"
+  node-version:
+    description: "Node.js version to use."
+    required: false
+    default: "18"
+
 runs:
-   using: "composite"
-   steps:
-      # Checkout the code from the repository
-      - name: Checkout repository
-        uses: actions/checkout@v3
+  using: "composite"
+  steps:
+    # Checkout the code from the repository
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      # Set up Node.js environment
-      - name: Set up Python
-        uses: actions/setup-node@v4
-        with:
-          node-version: '3.x' # Specify the Node.js version you need
+    # Set up Python environment
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python-version }}
 
-      # Run a custom command
-      - name: Install dependencies
-        run: |
-          echo "Installing dependencies..."
-          npm install
-          python -m pip install --upgrade pip
-          if [ -f "requirements.txt" ]; then
-            pip install -r requirements.txt
-          fi
-        working-directory: ${{ inputs.working-directory }}
-      
+    # Set up Node.js environment
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    # Run a custom command to install dependencies
+    - name: Install dependencies
+      run: |
+        echo "Installing dependencies..."
+        npm install
+        python -m pip install --upgrade pip
+        if [ -f "requirements.txt" ]; then
+          pip install -r requirements.txt
+        fi
+      working-directory: ${{ inputs.working-directory }}
