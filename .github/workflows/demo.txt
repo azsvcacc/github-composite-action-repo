@@ -1,0 +1,41 @@
+name: Node.js Application Build
+
+on:
+  workflow_call
+    inputs:
+      node-version:
+        description: "The Node.js version to use."
+        required: false
+        default: "20.x"
+      working-directory:
+        description: "The directory to execute commands in."
+        required: false
+        default: "."
+
+jobs:
+  NodeJs:
+    runs-on: self-hosted-linux-vm
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js environment
+      - name: Set up Node.js
+        uses: github-composite-action-repo/.github/actions/nodejs@main
+        with:
+          node-version: ${{ inputs.node-version }}
+          working-directory: ${{ inputs.working-directory }}
+
+      # Install project dependencies
+      - name: build
+        run: npm run build
+      # Artifactory upload
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          # Artifact name
+          name: build-artifacts
+          path: dist
+
+
