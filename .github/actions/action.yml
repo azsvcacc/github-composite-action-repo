@@ -1,0 +1,25 @@
+name: Setup Build Environemnt
+
+inputs:
+  pythonVersion:
+    description: Version of Python
+    required: false
+    default: '3.x'
+  nodejsVersion:
+    description: Version of Node JS
+    required: false
+    default: '18.x'
+    
+runs:
+  using: "composite"
+
+  steps:
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+           python-version: '3.x'
+           
+      - name: Setup Node JS
+        uses: actions/setup-node@v4
+        with:
+           node-version: 20.x
