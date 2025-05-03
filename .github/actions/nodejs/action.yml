@@ -14,7 +14,6 @@ inputs:
     description: "The directory to execute commands in."
     required: false
     default: "."
-secrets:
   github-token:
     description: "GitHub token for authentication."
     required: true
@@ -27,7 +26,7 @@ runs:
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
-        token: ${{ secrets.github-token }}
+        token: ${{ inputs.github-token }}
 
     # Step 2: Set up Node.js environment
     - name: Set up Node.js
