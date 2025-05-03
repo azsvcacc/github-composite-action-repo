@@ -33,4 +33,5 @@ runs:
     # Step 3: Install project dependencies
     - name: Install Node.js dependencies
       run: npm install
+      shell: bash
       working-directory: ${{ inputs.working-directory }}
