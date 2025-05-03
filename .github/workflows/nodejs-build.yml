@@ -1,6 +1,6 @@
 name: Angular Application Build
 on:
-  workflow_call:  # This makes it reusable
+  workflow_call:
     inputs:
       node-version:
         type: string
@@ -17,23 +17,16 @@ jobs:
   AngularBuild:
     runs-on: self-hosted-linux-vm
     steps:
-      # # Step 1: Checkout the repository
-      # - name: Checkout repository
-      #   uses: actions/checkout@v3
-
-      # Step 2: Set up Node.js environment
       - name: Set up Node.js
-        uses: azsvcacc/github-composite-action-repo/.github/actions/nodejs@main  # Assuming the composite action is stored in ./github/actions/nodejs
+        uses: azsvcacc/github-composite-action-repo/.github/workflows/nodejs-build.yml@main
         with:
           node-version: ${{ inputs.node-version }}
           working-directory: ${{ inputs.working-directory }}
 
-      # Step 4: Build Angular application
       - name: Build Angular app
         run: npm run build
         working-directory: ${{ inputs.working-directory }}
 
-      # Step 5: Upload the build artifact
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.2
         with:
