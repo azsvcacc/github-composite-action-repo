@@ -6,10 +6,6 @@ inputs:
     description: "The Node.js version to use."
     required: false
     default: "20.x"
-  python-version:
-    description: "The Python version to use."
-    required: false
-    default: "3.10"
   working-directory:
     description: "The directory to execute commands in."
     required: false
