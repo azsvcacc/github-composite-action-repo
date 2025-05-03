@@ -34,13 +34,7 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
 
-    # Step 3: Set up Python environment
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ inputs.python-version }}
-
-    # Step 4: Install project dependencies
+    # Step 3: Install project dependencies
     - name: Install Node.js dependencies
       run: npm install
       working-directory: ${{ inputs.working-directory }}
