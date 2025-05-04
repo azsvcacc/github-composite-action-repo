@@ -12,10 +12,7 @@ on:
         description: "The directory to execute commands in."
         required: false
         default: "."
-    secrets:
-      github-token:
-        description: "GitHub token for authentication."
-        required: true
+
 
 jobs:
   AngularBuild:
@@ -26,7 +23,7 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
           working-directory: ${{ inputs.working-directory }}
-          github-token: ${{ secrets.github-token }}
+          github-token: ${{ secrets.GIT_TOKEN }}
 
       - name: Build Angular app
         run: npm run build
