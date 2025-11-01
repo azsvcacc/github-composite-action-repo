@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: "Currency Converter Project"
+
+  main:
+    banner-mode: console   # console e Spring banner show hobe
+
+  logging:
+    level:
+      root: INFO
+      org.springframework.web: DEBUG
+      com.example: DEBUG   # tumar project package er log
+
+  devtools:
+    restart:
+      enabled: true        # code change hole auto restart
+    livereload:
+      enabled: true        # browser refresh (jsp/thymleaf hole useful)
+
+server:
+  port: 8080
